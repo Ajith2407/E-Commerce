@@ -1,30 +1,47 @@
-import { Component, Input,OnInit, ViewChild,ElementRef} from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styles: [
-  ]
+  templateUrl: './carousel.component.html'
 })
-export class CarouselComponent implements OnInit{
-  @Input() slideImages!:string[];
-  @ViewChild('sliderRef') sliderRef!:ElementRef;
-  constructor(){
-  }
-  selectedSlide=0;
+export class CarouselComponent implements AfterViewInit {
+  @Input() slideImages!: string[];
+  @ViewChild('sliderRef') sliderRef!: ElementRef<HTMLDivElement>;
 
-  selectSlide(index:number|any){
+  selectedSlide = 0;
+
+  ngAfterViewInit(): void {
+    this.scrollToSlide(this.selectedSlide);
+  }
+
+  onPrev() {
+    if (this.selectedSlide > 0) {
+      this.selectedSlide--;
+    } else {
+      this.selectedSlide = this.slideImages.length - 1;
+    }
+    this.scrollToSlide(this.selectedSlide);
+  }
+
+  onNext() {
+    if (this.selectedSlide < this.slideImages.length - 1) {
+      this.selectedSlide++;
+    } else {
+      this.selectedSlide = 0;
+    }
+    this.scrollToSlide(this.selectedSlide);
+  }
+
+  selectSlide(index: number) {
     this.selectedSlide = index;
+    this.scrollToSlide(index);
   }
-  onPrev(){
-    let width=this.sliderRef.nativeElement.clientWidth;
-    this.sliderRef.nativeElement.scrollLeft=this.sliderRef.nativeElement.scrollLeft-width;
+
+  private scrollToSlide(index: number) {
+    const width = this.sliderRef.nativeElement.clientWidth;
+    this.sliderRef.nativeElement.scrollTo({
+      left: width * index,
+      behavior: 'smooth'
+    });
   }
-  onNext(){
-    let width=this.sliderRef.nativeElement.clientWidth;
-    this.sliderRef.nativeElement.scrollLeft=this.sliderRef.nativeElement.scrollLeft+width;
-  }
-  ngOnInit(): void {
-  }
-  
 }

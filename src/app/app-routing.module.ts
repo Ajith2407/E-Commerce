@@ -8,51 +8,56 @@ import { Page404Component } from './core/components/page404/page404.component';
 import { CheckoutComponent } from './modules/product/components/checkout/checkout.component';
 import { canActivate } from './shared/services/auth/authguard.service';
 import { SearchresultComponent } from './core/components/searchresult/searchresult.component';
+import { WishlistComponent } from './core/components/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:HomeComponent
+    path: '',
+    component: HomeComponent
   },
   {
-    path:'login',
-    component:LoginComponent,
+    path: 'login',
+    component: LoginComponent,
     // canActivate:[canActivate]
 
   },
   {
-    path:'register',
-    component:RegisterComponent,
+    path: 'register',
+    component: RegisterComponent,
     // canActivate:[canActivate]
 
   },
   {
-    path:'products',
-    component:SearchresultComponent
+    path: 'products',
+    component: SearchresultComponent
   },
   {
-    path:'categories',
-    loadChildren:()=>import('./modules/product/product.module').then(m=>m.ProductModule)
+    path: 'categories',
+    loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule)
   },
   {
-    path:'shopping-cart',
-    component:CartComponent
+    path: 'shopping-cart',
+    component: CartComponent
   },
   {
-    path:'checkout',
-    component:CheckoutComponent,
-    canActivate:[canActivate],
+    path: 'wishlist',
+    component: WishlistComponent
   },
   {
-    path:'**',
-    component:Page404Component,
-    data:{message:'Oops... This is a Bad request'}
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [canActivate],
+  },
+  {
+    path: '**',
+    component: Page404Component,
+    data: { message: 'Oops... This is a Bad request' }
   },
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{preloadingStrategy:PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

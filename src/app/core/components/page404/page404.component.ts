@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import { ActivatedRoute,Data } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-page404',
@@ -7,13 +7,13 @@ import { ActivatedRoute,Data } from '@angular/router';
   styles: [
   ]
 })
-export class Page404Component implements OnInit{
-  errorMessage!:string;
-  constructor(private route:ActivatedRoute){}
+export class Page404Component implements OnInit {
+  errorMessage!: string;
+  constructor(private route: ActivatedRoute) { }
   ngOnInit(): void {
-      this.errorMessage=this.route.snapshot.data['message'];
-      this.route.data.subscribe((data:Data)=>{
-          this.errorMessage=data['message'];
-      })
+    this.errorMessage = this.route.snapshot.data['message'];
+    this.route.data.subscribe((data: Data) => {
+      this.errorMessage = data['message'];
+    })
   }
 }

@@ -17,6 +17,8 @@ import { SearchresultComponent } from './core/components/searchresult/searchresu
 import { SearchComponent } from './core/layout/components/header/search/search.component';
 import { AuthinterceptorService } from './shared/services/auth/authinterceptor.service';
 import { SharedModule } from './shared/shared.module';
+import { WishlistComponent } from './core/components/wishlist/wishlist.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,21 +32,22 @@ import { SharedModule } from './shared/shared.module';
     CartitemComponent,
     Page404Component,
     SearchresultComponent,
-    SearchComponent
+    SearchComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     SharedModule
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthinterceptorService,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthinterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
