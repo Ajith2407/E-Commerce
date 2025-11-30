@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit{
       address:new FormControl('',[Validators.required]),
       city:new FormControl('',[Validators.required]),
       state:new FormControl('',[Validators.required]),
-      country:new FormControl('India',[Validators.required]),
+      country:new FormControl('Tamil Nadu',[Validators.required]),
       postalCode:new FormControl('',[Validators.required]),
     })
   }
